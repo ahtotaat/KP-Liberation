@@ -108,19 +108,54 @@ KPLIB_PRST_SETVAR("storageSmall", "ContainmentArea_02_sand_F");
 // These are the boats which spawn in the boat racks of the Liberty.
 KPLIB_PRST_SETVAR("addBoat", "B_Boat_Transport_01_F");
 // These are the additional helicopter which spawns at the Operation Base.
-KPLIB_PRST_SETVAR("addHeli", "B_Heli_Light_01_F");
+KPLIB_PRST_SETVAR("addRotaryUnarmed", "B_Heli_Light_01_F");
+// These are the additional armed helicopters which spawns at the Operation Base.
+KPLIB_PRST_SETVAR("addRotaryArmed", "B_Heli_Light_01_F");
+// These are the ground assets which spawn in the HQ.
+KPLIB_PRST_SETVAR("addGroundLight", "B_Heli_Light_01_F");
+// These are the armed ground assets which spawn in the HQ.
+KPLIB_PRST_SETVAR("addGroundArmed", "B_Heli_Light_01_F");
+// These are the armored ground assets which spawn in the HQ.
+KPLIB_PRST_SETVAR("addGroundArmored", "B_Heli_Light_01_F");
 // These are the trucks which are used in the logistic convoy system.
 KPLIB_PRST_SETVAR("logiTruck", "B_Truck_01_transport_F");
 // Static Mortar Classname
 KPLIB_PRST_SETVAR("mortar", "B_Mortar_01_F");
-// Static AA Classname
-KPLIB_PRST_SETVAR("staticAa", "B_static_AA_F");
-// Static Big AA Classname
-KPLIB_PRST_SETVAR("staticAaBig", "B_SAM_System_03_F");
-// Static Big AA Radar Classname
-KPLIB_PRST_SETVAR("staticAaBigRadar", "B_Radar_System_01_F");
-// Static AT Classname
-KPLIB_PRST_SETVAR("staticAt", "B_static_AT_F");
+// Static Anti-Air Classname
+KPLIB_PRST_SETVAR("staticAntiAir", "B_static_AA_F");
+// Static Big Anti-Air Classname
+KPLIB_PRST_SETVAR("staticAntiAirBig", "B_SAM_System_03_F");
+// Static Big Anti-Air Radar Classname
+KPLIB_PRST_SETVAR("staticAntiAirBigRadar", "B_Radar_System_01_F");
+// Static Anti-Tank Classname
+KPLIB_PRST_SETVAR("staticAntiTank", "B_static_AT_F");
+// Mk49 Spartan short range SAM turret for use within the Operation Base.
+// https://armedassault.fandom.com/wiki/Mk49_Spartan
+// https://armedassault.fandom.com/wiki/Category:Anti-aircraft_systems_(ArmA_3)
+KPLIB_PRST_SETVAR("turretShortRangeSam", "B_SAM_System_01_F");
+// Mk21 Centurion medium range SAM turret for use within the Operation Base.
+// https://armedassault.fandom.com/wiki/Mk21_Centurion
+// https://armedassault.fandom.com/wiki/Category:Anti-aircraft_systems_(ArmA_3)
+KPLIB_PRST_SETVAR("turretMediumRangeSam", "B_SAM_System_02_F");
+// Praetorian 1C 20 mm phalanx anti-air minigun turret for use within the Operation Base.
+// https://armedassault.fandom.com/wiki/Praetorian_1C
+// https://armedassault.fandom.com/wiki/Category:Anti-aircraft_systems_(ArmA_3)
+KPLIB_PRST_SETVAR("turretPhalanxMinigun", "B_AAA_System_01_F");
+// Mk45 Hammer shipborne 5 inch artillery piece for use within the Operation Base, requires Jets DLC.
+// https://armedassault.fandom.com/wiki/USS_Liberty#MK45_Hammer
+// https://military.com/equipment/mk-45-5-inch-gun
+KPLIB_PRST_SETVAR("turretGun", "B_Ship_Gun_01_F");
+// Mk41 VLS shipborne missile canister for use within the Operation Base, requires Jets DLC.
+// https://armedassault.fandom.com/wiki/USS_Liberty#MK41_VLS
+// https://military.wikia.org/wiki/Mark_41_Vertical_Launching_System
+KPLIB_PRST_SETVAR("turretVls", "B_Ship_MRLS_01_F");
+// MIM-145 Defender long range SAM for use within the Operation Base, requires Jets DLC.
+// https://armedassault.fandom.com/wiki/MIM-145_Defender
+// https://armedassault.fandom.com/wiki/Category:Anti-aircraft_systems_(ArmA_3)
+KPLIB_PRST_SETVAR("longRangeSam", "B_SAM_System_03_F");
+// Long range AN/MPQ-105 Radar for use within the Operation Base, requires Jets DLC.
+// https://armedassault.fandom.com/wiki/Category:Anti-aircraft_systems_(ArmA_3)
+KPLIB_PRST_SETVAR("longRangeRadar", "B_Radar_System_01_F");
 
 
 /*------------------------------------------------------------
@@ -327,10 +362,10 @@ KPLIB_PRST_CAT_ADD("statics", "B_HMG_01_F",                                   25
 KPLIB_PRST_CAT_ADD("statics", "B_HMG_01_high_F",                              25,   40,    0);    // Mk30 HMG .50 (Raised)
 KPLIB_PRST_CAT_ADD("statics", "B_GMG_01_F",                                   35,   60,    0);    // Mk32 GMG 20mm
 KPLIB_PRST_CAT_ADD("statics", "B_GMG_01_high_F",                              35,   60,    0);    // Mk32 GMG 20mm (Raised)
-KPLIB_PRST_CAT_ADD("statics", KPLIB_PRST_GETVAR("staticAa"),                  50,  100,    0);    // Static Titan Launcher (AA)
-KPLIB_PRST_CAT_ADD("statics", KPLIB_PRST_GETVAR("staticAt"),                  50,  100,    0);    // Static Titan Launcher (AT)
+KPLIB_PRST_CAT_ADD("statics", KPLIB_PRST_GETVAR("staticAntiAir"),             50,  100,    0);    // Static Titan Launcher (AA)
+KPLIB_PRST_CAT_ADD("statics", KPLIB_PRST_GETVAR("staticAntiTank"),            50,  100,    0);    // Static Titan Launcher (AT)
 KPLIB_PRST_CAT_ADD("statics", KPLIB_PRST_GETVAR("mortar"),                    80,  150,    0);    // Mk6 Mortar
-KPLIB_PRST_CAT_ADD("statics", KPLIB_PRST_GETVAR("staticAaBig"),              250,  300,    0);    // MIM-145 Defender
+KPLIB_PRST_CAT_ADD("statics", KPLIB_PRST_GETVAR("staticAntiAirBig"),         250,  300,    0);    // MIM-145 Defender
 KPLIB_PRST_CAT_END("statics");
 
 // Logistic/Utility vehicles and objects
@@ -345,7 +380,7 @@ KPLIB_PRST_CAT_ADD("logistic", KPLIB_PRST_GETVAR("logiBuilding"),            250
 KPLIB_PRST_CAT_ADD("logistic", KPLIB_PRST_GETVAR("airBuilding"),            1000,    0,    0);
 KPLIB_PRST_CAT_ADD("logistic", KPLIB_PRST_GETVAR("slotHeli"),                250,    0,    0);
 KPLIB_PRST_CAT_ADD("logistic", KPLIB_PRST_GETVAR("slotJet"),                 500,    0,    0);
-KPLIB_PRST_CAT_ADD("logistic", KPLIB_PRST_GETVAR("staticAaBigRadar"),        250,    0,    0);    // AN/MPQ-105 Radar
+KPLIB_PRST_CAT_ADD("logistic", KPLIB_PRST_GETVAR("staticAntiAirBigRadar"),   250,    0,    0);    // AN/MPQ-105 Radar
 KPLIB_PRST_CAT_ADD("logistic", "B_Truck_01_Repair_F",                        325,    0,   75);    // HEMTT Repair
 KPLIB_PRST_CAT_ADD("logistic", "B_Truck_01_fuel_F",                          125,    0,  275);    // HEMTT Fuel
 KPLIB_PRST_CAT_ADD("logistic", "B_Truck_01_ammo_F",                          125,  200,   75);    // HEMTT Ammo

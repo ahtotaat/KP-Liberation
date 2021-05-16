@@ -99,22 +99,39 @@ KPLIB_PRST_SETVAR("storageSmall", "ContainmentArea_02_sand_F");
     The entered classnames can be reused somewhere else in the preset.
 ------------------------------------------------------------*/
 
-// These are the boats which spawn in the boat racks of the Liberty.
+// CSAT Assault boat asset spawning in the boat racks of the Liberty.
 KPLIB_PRST_SETVAR("addBoat", "O_Boat_Transport_01_F");
-// These are the additional helicopter which spawns at the Operation Base.
-KPLIB_PRST_SETVAR("addHeli", "B_Heli_Light_01_F");
+// PO-30 Orca (Unarmed) light rotary asset spawning at the Operation Base.
+KPLIB_PRST_SETVAR("addRotaryLight", "O_Heli_light_02_unarmed_F");
+// Mi-290 Taru (Bench) rotary asset spawning in the Operation Base, requires Helicopters DLC.
+KPLIB_PRST_SETVAR("addRotaryUnarmed", "O_Heli_Transport_04_bench_F");
+// Mi-48 Kajman with dynamic loadout capability spawning in the Operation Base.
+KPLIB_PRST_SETVAR("addRotaryArmed", "O_Heli_Attack_02_dynamicLoadout_F");
+// Qilin (Unarmed) light ground asset spawning in the Operation Base, requires Apex.
+KPLIB_PRST_SETVAR("addGroundLight", "O_LSV_02_unarmed_F");
+// Qilin (Minigun) armed ground asset spawning in the Operation Base, requires Apex.
+KPLIB_PRST_SETVAR("addGroundArmed", "O_LSV_02_armed_F");
+// Ifrit (MRAP) armored ground asset spawning in the Operation Base.
+KPLIB_PRST_SETVAR("addGroundArmored", "O_MRAP_02_F");
 // These are the trucks which are used in the logistic convoy system.
 KPLIB_PRST_SETVAR("logiTruck", "O_Truck_03_transport_F");
 // Static Mortar Classname
 KPLIB_PRST_SETVAR("mortar", "O_Mortar_01_F");
-// Static AA Classname
-KPLIB_PRST_SETVAR("staticAa", "O_static_AA_F");
-// Static Big AA Classname
-KPLIB_PRST_SETVAR("staticAaBig", "O_SAM_System_04_F");
-// Static Big AA Radar Classname
-KPLIB_PRST_SETVAR("staticAaBigRadar", "O_Radar_System_02_F");
-// Static AT Classname
-KPLIB_PRST_SETVAR("staticAt", "O_static_AT_F");
+// Static Anti-Air Classname
+KPLIB_PRST_SETVAR("staticAntiAir", "O_static_AA_F");
+// Static Big Anti-Air Classname
+KPLIB_PRST_SETVAR("staticAntiAirBig", "O_SAM_System_04_F");
+// Static Big Anti-Air Radar Classname
+KPLIB_PRST_SETVAR("staticAntiAirBigRadar", "O_Radar_System_02_F");
+// Static Anti-Tank Classname
+KPLIB_PRST_SETVAR("staticAntiTank", "O_static_AT_F");
+// S-750 Rhea long range SAM for use within the Operation Base, requires Jets DLC.
+// https://armedassault.fandom.com/wiki/S-750_Rhea
+// https://armedassault.fandom.com/wiki/Category:Anti-aircraft_systems_(ArmA_3)
+KPLIB_PRST_SETVAR("longRangeSam", "O_SAM_System_04_F");
+// Long range R-750 Chronus Radar for use within the Operation Base, requires Jets DLC.
+// https://armedassault.fandom.com/wiki/Category:Anti-aircraft_systems_(ArmA_3)
+KPLIB_PRST_SETVAR("longRangeRadar", "O_Radar_System_02_F");
 
 
 /*------------------------------------------------------------
@@ -319,10 +336,10 @@ KPLIB_PRST_CAT_ADD("statics", "O_HMG_01_F",                                   25
 KPLIB_PRST_CAT_ADD("statics", "O_HMG_01_high_F",                              25,   40,    0);    // Mk30 HMG .50 (Raised)
 KPLIB_PRST_CAT_ADD("statics", "O_GMG_01_F",                                   35,   60,    0);    // Mk32 GMG 20mm
 KPLIB_PRST_CAT_ADD("statics", "O_GMG_01_high_F",                              35,   60,    0);    // Mk32 GMG 20mm (Raised)
-KPLIB_PRST_CAT_ADD("statics", KPLIB_PRST_GETVAR("staticAa"),                  50,  100,    0);    // Static Titan Launcher (AA)
-KPLIB_PRST_CAT_ADD("statics", KPLIB_PRST_GETVAR("staticAt"),                  50,  100,    0);    // Static Titan Launcher (AT)
+KPLIB_PRST_CAT_ADD("statics", KPLIB_PRST_GETVAR("staticAntiAir"),             50,  100,    0);    // Static Titan Launcher (AA)
+KPLIB_PRST_CAT_ADD("statics", KPLIB_PRST_GETVAR("staticAntiTank"),            50,  100,    0);    // Static Titan Launcher (AT)
 KPLIB_PRST_CAT_ADD("statics", KPLIB_PRST_GETVAR("mortar"),                    80,  150,    0);    // Mk6 Mortar
-KPLIB_PRST_CAT_ADD("statics", KPLIB_PRST_GETVAR("staticAaBig"),              250,  300,    0);    // MIM-145 Defender
+KPLIB_PRST_CAT_ADD("statics", KPLIB_PRST_GETVAR("staticAntiAirBig"),         250,  300,    0);    // MIM-145 Defender
 KPLIB_PRST_CAT_END("statics");
 
 // Logistic vehicles and objects
@@ -337,7 +354,7 @@ KPLIB_PRST_CAT_ADD("logistic", KPLIB_PRST_GETVAR("logiBuilding"),            250
 KPLIB_PRST_CAT_ADD("logistic", KPLIB_PRST_GETVAR("airBuilding"),            1000,    0,    0);
 KPLIB_PRST_CAT_ADD("logistic", KPLIB_PRST_GETVAR("slotHeli"),                250,    0,    0);
 KPLIB_PRST_CAT_ADD("logistic", KPLIB_PRST_GETVAR("slotJet"),                 500,    0,    0);
-KPLIB_PRST_CAT_ADD("logistic", KPLIB_PRST_GETVAR("staticAaBigRadar"),        250,    0,    0);    // R-750 Cronus Radar
+KPLIB_PRST_CAT_ADD("logistic", KPLIB_PRST_GETVAR("staticAntiAirBigRadar"),   250,    0,    0);    // R-750 Cronus Radar
 KPLIB_PRST_CAT_ADD("logistic", "O_Truck_03_repair_F",                        325,    0,   75);    // Tempest Repair
 KPLIB_PRST_CAT_ADD("logistic", "O_Truck_03_fuel_F",                          125,    0,  275);    // Tempest Fuel
 KPLIB_PRST_CAT_ADD("logistic", "O_Truck_03_ammo_F",                          125,  200,   75);    // Tempest Ammo

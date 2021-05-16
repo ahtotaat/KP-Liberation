@@ -42,6 +42,7 @@ if !(
         _prstVar = [_prstVar] call KPLIB_fnc_init_filterMods;
     } else {
         if !([_prstVar] call KPLIB_fnc_init_checkClass) then {
+            [format ["Check failed: %1", _prstVar], "CHECK CLASS", true] call KPLIB_fnc_common_log;
             KPLIB_validationNamespace setVariable ["KPLIB_preset_checkedSingles", false];
         };
     };

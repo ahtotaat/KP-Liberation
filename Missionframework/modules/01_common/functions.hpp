@@ -44,13 +44,24 @@ class common {
     // Generate positions in circle
     class common_getCirclePositions {};
 
-    // Gets fob alphabet name
-    class common_getFobAlphabetName {};
+    // Converts the index to that sequence of military alphabet names.
+    class common_indexToMilitaryAlpha {};
 
     // Gets path for className icon
     class common_getIcon {};
 
-    // Returns the FOB of the given player
+    // Returns the full [_sectorInfo] tuple from the _target object, if possible [default: ["", "", KPLIB_sectorType_nil]]
+    //                                                                         _markerType: ^^
+    //                                                                               _uuid:     ^^
+    //                                                                         _sectorType:         ^^^^^^^^^^^^^^^^^^^^
+   class common_getSectorInfo {};
+
+    // TODO: TBD: note, that we try to maintain some consistency, for now...
+    // TODO: TBD: the machinery, best term for it, facilitating the whole build procedure really is massive
+    // TODO: TBD: so trying to keep consistency there, for now, before mucking around too much with it
+
+    /* A more specific version, wrapper to 'common_getSectorInfo', does the same thing,
+     * filters for the '_markerType', in keeping with the refactor baseline. */
     class common_getPlayerFob {};
 
     // getPos wrapper for ATL positions
@@ -67,9 +78,6 @@ class common {
 
     // Checks if player occupies a slot
     class common_isSlot {};
-
-    // Logs given text to server rpt
-    class common_log {};
 
     // Initialize common module
     class common_preInit {

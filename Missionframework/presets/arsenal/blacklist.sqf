@@ -21,9 +21,9 @@ KPLIB_preset_arsenal_blacklist = [
 // Magazines which shouldn't be available in the arsenal.
 
 // Items, Uniforms, Headgear, etc. which shouldn't be available in the arsenal.
-    "optic_Nightstalker",
-    "optic_tws",
-    "optic_tws_mg",
+    //"optic_Nightstalker",
+    //"optic_tws",
+    //"optic_tws_mg",
 // Backpacks which shouldn't be available in the arsenal.
     "I_HMG_01_weapon_F",
     "B_HMG_01_weapon_F",

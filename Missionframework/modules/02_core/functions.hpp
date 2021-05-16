@@ -32,8 +32,14 @@ class core {
     // Check if win conditions are met
     class core_checkWinCond {};
 
-    // Creates FOB marker
-    class core_createFobMarker {};
+    // Creates the Forward Operating Base (FOB) meta-data tuple
+    class core_createFob {};
+
+    // Selects the Forward Operating Bases (FOBs) meeting the predicated conditions
+    class core_selectFobs {};
+
+    // Callback used to determine whether the target is within range of the FOB position
+    class core_fob_callback_onWithinRange {};
 
     // Get all mobile respawn vehicles
     class core_getMobSpawns {};
@@ -46,9 +52,6 @@ class core {
 
     // Handle vehicle spawn event
     class core_handleVehicleSpawn {};
-
-    // Moves helicopter from hangar to aft deck
-    class core_heliToDeck {};
 
     // Module post initialization
     class core_postInit {
@@ -86,4 +89,7 @@ class core {
 
     // Updates the sector marker colors
     class core_updateSectorMarkers {};
+
+    // Rebuilds the FOB from saved state upon load
+    class core_rebuildFob {};
 };

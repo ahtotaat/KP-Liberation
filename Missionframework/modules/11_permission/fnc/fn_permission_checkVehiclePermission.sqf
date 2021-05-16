@@ -35,9 +35,14 @@ private _data = [];
 private _permission = "";
 private _isCargo = (_vehicle getCargoIndex _unit) != -1;
 private _whitelist = [
-    KPLIB_preset_potatoF,
-    KPLIB_preset_addHeliF,
-    KPLIB_preset_addBoatF
+    KPLIB_preset_potatoF
+    , KPLIB_preset_addRotaryLightF
+    , KPLIB_preset_addRotaryUnarmedF
+    , KPLIB_preset_addRotaryArmedF
+    , KPLIB_preset_addGroundF
+    , KPLIB_preset_addGroundArmedF
+    , KPLIB_preset_addGroundArmoredF
+    , KPLIB_preset_addBoatF
 ];
 
 if (_isCargo || typeOf _vehicle in _whitelist) exitWith {

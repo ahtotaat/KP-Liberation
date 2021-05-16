@@ -10,6 +10,10 @@
     Description:
     Contains all settings which are meant to be adjustable by players but aren't implemented in the mission settings.
 */
+KPLIB_param_presetF = 4;
+KPLIB_param_presetE = 5;
+KPLIB_param_presetC = 1;
+KPLIB_param_presetR = 1;
 
 /*------------------------------------------------------------
     --- SAVE SETTINGS ---
@@ -125,6 +129,7 @@ KPLIB_resupply_repairSource = [
     "rhsusf_M977A4_REPAIR_BKIT_usarmy_wd",
     "rhsusf_M977A4_REPAIR_BKIT_M2_usarmy_d",
     "rhsusf_M977A4_REPAIR_BKIT_M2_usarmy_wd",
+    "rnt_lkw_10t_mil_gl_kat_i_repair_fleck",        // Redd'n Tank Vehicles mod
     "BW_LKW15T_Repair_F"
 ];
 
@@ -141,6 +146,7 @@ KPLIB_resupply_rearmSource = [
     "rhsusf_M977A4_AMMO_BKIT_usarmy_wd",
     "rhsusf_M977A4_AMMO_BKIT_M2_usarmy_d",
     "rhsusf_M977A4_AMMO_BKIT_M2_usarmy_wd",
+    "rnt_lkw_7t_mil_gl_kat_i_mun_fleck",
     "BW_LKW15T_Ammo_F"
 ];
 
@@ -157,6 +163,7 @@ KPLIB_resupply_refuelSource = [
     "rhsusf_M978A4_usarmy_wd",
     "rhsusf_M978A4_BKIT_usarmy_d",
     "rhsusf_M978A4_BKIT_usarmy_wd",
+    "rnt_lkw_5t_mil_gl_kat_i_fuel_fleck",
     "BW_LKW15T_Fuel_F"
 ];
 

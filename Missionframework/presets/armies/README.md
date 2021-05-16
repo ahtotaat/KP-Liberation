@@ -175,7 +175,7 @@ Each listed variable/array needs the `F` or `E` suffix to access the correspondi
 
   *Special Forces Explosive Specialist.*
 
-* **KPLIB_preset_sfLightAt**
+* **KPLIB_preset_sfLightAntiTank**
 
   *Special Forces Light Anti Tank.*
 
@@ -215,21 +215,21 @@ Each listed variable/array needs the `F` or `E` suffix to access the correspondi
 
   *Hangar used to increase the GLOBAL fixed-wing cap.*
 
-* **KPLIB_preset_staticAa**
+* **KPLIB_preset_staticAntiAir**
 
-  *Static AA Classname.*
+  *Static Anti-Air Classname.*
 
-* **KPLIB_preset_staticAaBig**
+* **KPLIB_preset_staticAntiAirBig**
 
-  *Static Big AA Classname.*
+  *Static Big Anti-Air Classname.*
 
-* **KPLIB_preset_staticAaBigRadar**
+* **KPLIB_preset_staticAntiAirBigRadar**
 
-  *Static Big AA Radar Classname.*
+  *Static Big Anti-Air Radar Classname.*
 
-* **KPLIB_preset_staticAt**
+* **KPLIB_preset_staticAntiTank**
 
-  *Static AT Classname.*
+  *Static Anti-Tank Classname.*
 
 * **KPLIB_preset_storageLarge**
 

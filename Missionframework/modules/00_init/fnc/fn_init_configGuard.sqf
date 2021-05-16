@@ -3,8 +3,9 @@
 
     File: fn_init_configGuard.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
-    Date: 2018-06-19
-    Last Update: 2019-05-04
+            Michael W. Powell [22nd MEU SOC]
+    Created: 2018-06-19
+    Last Update: 2021-01-24 16:04:12
     License: GNU General Public License v3.0 - https://www.gnu.org/licenses/gpl-3.0.html
     Public: No
 
@@ -48,11 +49,15 @@ KPLIB_validationNamespace setVariable ["KPLIB_preset_checkedSingles", true];
     // Get array of variables to check
     private _toValidate = allVariables KPLIB_validationNamespace;
     // If there is any "false" variable this means one of the guarded config files is invalid
+    // MWP 2021-01-24 01:19:46 Reworking some of these bits for better debug reporting.
+    private _invalid = _toValidate select {!(KPLIB_validationNamespace getVariable _x)};
     private _invalidConfig = (_toValidate findIf {!(KPLIB_validationNamespace getVariable _x)}) != -1;
 
     // End mission on invalid config
-    if(_invalidConfig) exitWith {
+    if (count _invalid > 0) exitWith {
         ["Invalid configuration files present. Ending mission for everyone", "CFG GUARD", true] call KPLIB_fnc_common_log;
+        [format ["Invalid configurations: %1", str _invalid], "CFG GUARD", true] call KPLIB_fnc_common_log;
+        [str (_toValidate apply {format ["%1: %2", _x, str (KPLIB_validationNamespace getVariable _x)]}), "CFG GUARD", true] call KPLIB_fnc_common_log;
         "KPLIB_configError" call BIS_fnc_endMissionServer;
     };
 

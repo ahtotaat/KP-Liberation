@@ -22,39 +22,97 @@ params [
     ["_vehicle", objNull, [objNull]]
 ];
 
+// TODO: TBD: consider, "on create callbacks" ...
+// TODO: TBD: better yet, class-based initializers...
+// TODO: TBD: possibly also requiring managers/FSMs for new join players, proxmity objects, i.e. add actions on the fly...
 switch (typeOf _vehicle) do {
+    // TODO: TBD: supports "F" side only at this time...
     case KPLIB_preset_fobBoxF;
     case KPLIB_preset_fobTruckF: {
         // Add FOB build action globaly and for JIP
         [
-            _vehicle,
-            "STR_KPLIB_ACTION_DEPLOY",
-            [{["KPLIB_fob_build_requested", _this select 0] call CBA_fnc_localEvent}, true, -800, false, true, "", "[_target, _this] call KPLIB_fnc_core_canBuildFob", 10]
+            _vehicle
+            , "STR_KPLIB_ACTION_DEPLOY"
+            , [
+                {["KPLIB_fob_build_requested", _this select 0] call CBA_fnc_localEvent}
+                , true
+                , -800
+                , false
+                , true
+                , ""
+                , '
+                    [_target, _this] call KPLIB_fnc_core_canBuildFob
+                '
+                , 10
+            ]
         ] remoteExecCall ["KPLIB_fnc_common_addAction", 0, _vehicle];
     };
 
     case KPLIB_preset_respawnTruckF;
     case KPLIB_preset_potatoF: {
-        // Set vehicle as mobile respawn
-        _vehicle setVariable ["KPLIB_respawn", true, true];
+
+        ////// TODO: TBD: "KPLIB_respawn" is already "in use" in a manner of speaking...
+        ////// TODO: TBD: we think it is a bad idea to confuse terminology, usage, when it should be a "class CfgRespawnTemplates {...}" member.
+        //// Set vehicle as mobile respawn
+        //_vehicle setVariable ["KPLIB_respawn", true, true];
+
+        // Handle some additional MR bookkeeping.
+        //// TODO: TBD: don't think we care about setting a UUID on the object itself any longer...
+        //_vehicle setVariable ["KPLIB_uuid", [] call KPLIB_fnc_uuid_create_string, true];
+        _vehicle setVariable ["KPLIB_sectorType", KPLIB_sectorType_mob, true];
+
         // Add redeploy action globaly and for JIP
         [
-            _vehicle,
-            "STR_KPLIB_ACTION_REDEPLOY",
-            [{["KPLIB_respawn_requested", _this] call CBA_fnc_localEvent}, nil, -801, false, true, "", "_this == vehicle _this", 10]
+            // TODO: TBD: was: "_this == vehicle _this"
+            // TODO: TBD: the action condition is very similar to actually "querying" for available mobile respawns we think...
+            // TODO: TBD: max speed 5, setup a parameter (?)
+            // TODO: TBD: max alt, setup a parameter (?)
+            _vehicle
+            , "STR_KPLIB_ACTION_REDEPLOY"
+            , [
+                {["KPLIB_respawn_requested", _this] call CBA_fnc_localEvent}
+                , nil
+                , -801
+                , false
+                , true
+                , ""
+                , '
+                    _this == vehicle _this
+                    && ([_target, KPLIB_fnc_eden_callback_onWithinRange] call KPLIB_fnc_eden_select) isEqualTo []
+                    && ([_target, KPLIB_fnc_core_fob_callback_onWithinRange] call KPLIB_fnc_core_selectFobs) isEqualTo []
+                    && abs (speed _target) < 5
+                    && (getPos _target)#2 < 5
+                '
+                , 10
+            ]
         ] remoteExecCall ["KPLIB_fnc_common_addAction", 0, _vehicle];
     };
 
-    case KPLIB_preset_addHeliF: {
-        if ((_vehicle distance KPLIB_eden_startbase) < 20) then {
-            // Add moving action for start helicopters
-            [
-                _vehicle,
-                "STR_KPLIB_ACTION_HELIMOVE",
-                [{[_this select 0] call KPLIB_fnc_core_heliToDeck;}, nil, 10, true, true, "", "(_target distance KPLIB_eden_startbase) < 20", 4],
-                "#FF8000"
-            ] remoteExecCall ["KPLIB_fnc_common_addAction", 0, _vehicle];
-        };
+    case KPLIB_preset_addRotaryLightF: {
+
+        // TODO: TBD: startbases / https://github.com/mwpowellhtx/KP-Liberation/issues/2
+        // TODO: TBD: rotary flight decks / https://github.com/mwpowellhtx/KP-Liberation/issues/6
+
+        // TODO: TBD: we think there are still considerations concerning whether flight deck actually clear as part of the conditions...
+
+        // Adds moving action for start rotary assets.
+        [
+            _vehicle
+            , "STR_KPLIB_ACTION_ASSETMOVE"
+            , [
+                {[_this select 0] call KPLIB_fnc_core_rotaryToFlightDeck;}
+                , nil
+                , 10
+                , true
+                , true
+                , ""
+                , '
+                    !(([_target] call KPLIB_fnc_eden_selectWithFlightDeck) isEqualTo [])
+                '
+                , 4
+            ]
+            , "#FF8000" // TODO: TBD: colors could be defined as first class config variables
+        ] remoteExecCall ["KPLIB_fnc_common_addAction", 0, _vehicle];
     };
 };
 

@@ -3,42 +3,61 @@
 
     File: fn_respawn_getRespawns.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
-    Date: 2018-09-12
-    Last Update: 2019-04-22
+            Michael W. Powell [22nd MEU SOC]
+    Created: 2018-09-12
+    Last Update: 2021-01-27 14:04:43
     License: GNU General Public License v3.0 - https://www.gnu.org/licenses/gpl-3.0.html
     Public: Yes
 
     Description:
-        Get list of currenty available respawns
+        Returns an array of currenty available spawn points.
 
-    Parameter(s):
+    Parameters:
         NONE
 
     Returns:
-        Array of arrays with available respawns [ARRAY]
+        Array of spawn point tuples [ARRAY]
+            - spawn point tuple shape: [_fullName, _target]
 */
 
+private _spawns = KPLIB_sectors_edens apply {
+    [_x select 2 select 1, _x select 3 select 1] params ["_pos", "_markerText"];
+    [
+        format ["%1 - %2", mapGridPosition _pos, _markerText]
+        , _pos
+    ];
+};
 
-private _spawns = [[localize "STR_KPLIB_MAINBASE", KPLIB_eden_startbase]];
-
-// Add the FOBs to the spawn list
 {
+    // TODO: TBD: see: i.e. [_forEachIndex] call KPLIB_fnc_common_indexToMilitaryAlpha
+    // Assumes that the FOB markers have already been refreshed; see docs for the tuple specs.
+    [_x select 2 select 1, _x select 3 select 1] params ["_pos", "_markerText"];
+
     _spawns pushBack [
-        format ["FOB %1 - %2", (KPLIB_preset_alphabetF select _forEachIndex), mapGridPosition getMarkerPos _x],
-        _x
+        // TODO: TBD: allowing the bits to all identify themselves in position and marker text...
+        // TODO: TBD: which gets us much closder to a repeatable, deterministic pattern...
+        format ["%1 - %2", mapGridPosition _pos, _markerText]
+        , _pos
     ];
 } forEach KPLIB_sectors_fobs;
 
-// Add mobile respawns to the spawn list if parameter isn't disabled
+// Add mobile respawns to the spawn list if parameter is not disabled
 if (KPLIB_param_mobileRespawn) then {
     {
-        private _displayName = getText (configFile >>  "CfgVehicles" >> (typeOf _x) >> "displayName");
-        // Add item to list
-        _spawns pushBack [
-            format ["%1 - %2", _displayName, mapGridPosition getPos _x],
-            _x
+        [
+            // Get the display name from the vehicle configs and append.
+            getText (configFile >>  "CfgVehicles" >> (typeOf _x) >> "displayName")
+            , getPos _x
+        ] params [
+            "_displayName"
+            , "_pos"
         ];
-    } forEach ([] call KPLIB_fnc_core_getMobSpawns)
+
+        _spawns pushBack [
+            format ["%1 - %2", mapGridPosition _pos, _displayName]
+            , _pos
+        ];
+    } forEach ([] call KPLIB_fnc_core_getMobSpawns);
 };
 
 _spawns
